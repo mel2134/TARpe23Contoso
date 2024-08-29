@@ -1,6 +1,6 @@
 using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.DependencyInjection;
 internal class Program
 {
     private static void Main(string[] args)
