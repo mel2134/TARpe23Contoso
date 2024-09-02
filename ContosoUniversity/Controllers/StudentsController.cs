@@ -71,5 +71,30 @@ namespace ContosoUniversity.Controllers
             //return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(),pageNumber ?? 1,pageSize));
         }
         */
+
+        //create get, haarab vaatest andmed mida create meetod vajab
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        //Create, sisestab uue õpilase andmebaasi
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
+        {
+           if (ModelState.IsValid)
+           {
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+           }
+           return View(student);
+        }
+
+
+
     }
 }
