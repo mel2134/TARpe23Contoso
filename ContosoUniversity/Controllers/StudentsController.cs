@@ -140,6 +140,13 @@ namespace ContosoUniversity.Controllers
         }
 
 
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit ([Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
             if (ModelState.IsValid)
@@ -150,6 +157,13 @@ namespace ContosoUniversity.Controllers
             }
             return View(student);
         }
+
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult>
+
+        */
 
 
 
