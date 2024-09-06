@@ -166,3 +166,4 @@ C:\Users\opilane\source\repos\mel2134\TARpe23Contoso\ContosoUniversity\bin\Debug
 C:\Users\opilane\source\repos\mel2134\TARpe23Contoso\ContosoUniversity\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\opilane\source\repos\mel2134\TARpe23Contoso\ContosoUniversity\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\opilane\source\repos\mel2134\TARpe23Contoso\ContosoUniversity\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\opilane\Source\Repos\mel2134\TARpe23Contoso\ContosoUniversity\bin\Debug\net8.0\System.Text.Json.dll

@@ -158,12 +158,23 @@ namespace ContosoUniversity.Controllers
             return View(student);
         }
 
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult>
+        public async Task<IActionResult> Clone(int ?ID)
+        {
+            if (ID == null)
+            {
+                return NotFound();
+            }
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.ID == ID);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            var clonedStudent = new Student { FirstMidName = student.FirstMidName,LastName= student.LastName,EnrollmentDate = student.EnrollmentDate};
+            _context.Students.Add(clonedStudent);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
 
-        */
+        }
 
 
 
