@@ -15,7 +15,7 @@ namespace ContosoUniversity.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int ?id, int ?courseId)
+        public async Task<IActionResult> Index(int? id, int? courseId)
         {
             var vm = new InstructorIndexData();
             vm.Instructors = await _context.Instructors

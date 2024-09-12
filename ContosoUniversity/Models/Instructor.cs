@@ -26,9 +26,9 @@ namespace ContosoUniversity.Models
         public OfficeAssignment? OfficeAssignment { get; set; }
 
         [Display(Name = "Days off")]
-        public int DaysOff { get; set; }
-        public string Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public int? DaysOff { get; set; }
+        public string? Email { get; set; }
+        public int? PhoneNumber { get; set; }
 
     }
 }
