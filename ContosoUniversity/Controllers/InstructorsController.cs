@@ -58,8 +58,9 @@ namespace ContosoUniversity.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Instructor instructor,string selectedCourses)
+        public async Task<IActionResult> Create(Instructor instructor)
         {
+            /*
             if (selectedCourses == null)
             {
                 instructor.CourseAssignments = new List<CourseAssignment>();
@@ -70,13 +71,16 @@ namespace ContosoUniversity.Controllers
                 }
 
             }
+            */
+            //ModelState.Remove(selectedCourses);
+            //ModelState.Remove();
             if (ModelState.IsValid)
             {
                 _context.Add(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            PopulateAssignedCourseData(instructor); // uuendab instructori juures olevaid kursuseid
+            //PopulateAssignedCourseData(instructor); // uuendab instructori juures olevaid kursuseid
             return View(instructor);
         }
 

@@ -2,7 +2,11 @@
 using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+/*
+aspnetcore.diagnostics.entityframeworkcore
+entityframeworkcore.sqlserver
+dotnet tool install --global dotnet-ef
+*/
 namespace ContosoUniversity.Controllers
 {
     public class StudentsController : Controller
