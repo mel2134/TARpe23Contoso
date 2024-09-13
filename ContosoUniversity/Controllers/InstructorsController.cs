@@ -96,5 +96,30 @@ namespace ContosoUniversity.Controllers
             ViewData["Courses"] = vm;
 
         }
+        public async Task<IActionResult> Delete(int? ID)
+        {
+            if (ID == null)
+            {
+                return NotFound();
+            }
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == ID);
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+
+            return View(instructor);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int ID)
+        {
+            var instructor = await _context.Instructors.FindAsync(ID);
+            _context.Instructors.Remove(instructor);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }
