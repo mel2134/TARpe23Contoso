@@ -2,6 +2,7 @@
 using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 /*
 aspnetcore.diagnostics.entityframeworkcore
 entityframeworkcore.sqlserver
