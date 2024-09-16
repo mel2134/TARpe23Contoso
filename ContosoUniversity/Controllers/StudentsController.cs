@@ -154,9 +154,13 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit ([Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
-             _context.Students.Update(student);
-             await _context.SaveChangesAsync();
-             return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.Students.Update(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(student);
         }
 
         public async Task<IActionResult> Clone(int ?ID)
