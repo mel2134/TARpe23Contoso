@@ -158,6 +158,12 @@ namespace ContosoUniversity.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existingInstructor = await _context.Instructors.FindAsync(instructor.ID);
+
+                if (existingInstructor == null)
+                {
+                    return NotFound();
+                }
                 _context.Instructors.Update(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
