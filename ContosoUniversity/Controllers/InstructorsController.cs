@@ -72,6 +72,7 @@ namespace ContosoUniversity.Controllers
 
             }
             */
+            
             //ModelState.Remove(selectedCourses);
             //ModelState.Remove();
             if (ModelState.IsValid)
@@ -158,12 +159,13 @@ namespace ContosoUniversity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingInstructor = await _context.Instructors.FindAsync(instructor.ID);
+                var existingInstructor = _context.Instructors.AsNoTracking().FirstOrDefault(m => m.ID == instructor.ID);
 
                 if (existingInstructor == null)
                 {
                     return NotFound();
                 }
+
                 _context.Instructors.Update(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
