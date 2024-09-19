@@ -155,16 +155,10 @@ namespace ContosoUniversity.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("ID,LastName,FirstMidName,HireDate")] Instructor instructor)
+        public async Task<IActionResult> Edit(Instructor instructor)
         {
             if (ModelState.IsValid)
             {
-                var existingInstructor = _context.Instructors.AsNoTracking().FirstOrDefault(m => m.ID == instructor.ID);
-
-                if (existingInstructor == null)
-                {
-                    return NotFound();
-                }
 
                 _context.Instructors.Update(instructor);
                 await _context.SaveChangesAsync();
