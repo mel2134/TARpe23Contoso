@@ -85,11 +85,42 @@ namespace ContosoUniversity.Data
             }
             var instructors = new Instructor[]
             {
-                new Instructor{FirstMidName = "Ying",LastName="Yang",Email="ying@yang.jp",HireDate=DateTime.Parse("2019-09-01")},
-                new Instructor{FirstMidName = "Original",LastName="Name",Email="original@name.com",HireDate=DateTime.Parse("1776-09-01")},
-                new Instructor{FirstMidName = "This",LastName="One",Email="original@name.com",HireDate=DateTime.Parse("1776-09-01")},
+                new Instructor{FirstMidName = "Ying", LastName = "Yang", DaysOff = 0, HireDate = DateTime.Parse("2019-09-01")},
+                new Instructor{FirstMidName = "Original", LastName = "Name", DaysOff = 2, HireDate = DateTime.Parse("1776-09-01")},
+                new Instructor{FirstMidName = "This", LastName = "One", DaysOff = 9123, HireDate = DateTime.Parse("1776-09-01")},
             };
             context.Instructors.AddRange(instructors);
+            context.SaveChanges();
+
+
+            if (context.Departments.Any())
+            {
+                return;
+            }
+            var departments = new Department[]
+            {
+                new Department{
+                    Name="IT",
+                    Budget=0,
+                    StartDate=DateTime.Parse("1999-09-09"),
+                    InstructorID=1,
+                    SuperImportantString="ashydasnhdhjanjd shua",
+                },
+                new Department{
+                    Name="Language",
+                    Budget=0,
+                    StartDate=DateTime.Parse("2000-01-01"),
+                    InstructorID=1,
+                    SuperImportantString="ggghbnjmkl,aszxdcrfvgbhnjmk,2",
+                },
+                new Department{
+                    Name="Everything else",
+                    Budget=0,
+                    StartDate=DateTime.Parse("3000-01-01"),
+                    SuperImportantString="gfsdfshiASYDWEWiuwyrgctI12387646yiusabgdgy",
+                },
+            };
+            context.Departments.AddRange(departments);
             context.SaveChanges();
             /*
             context.Database.EnsureCreated();
