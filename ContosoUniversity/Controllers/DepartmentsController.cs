@@ -75,30 +75,28 @@ namespace ContosoUniversity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Make([Bind("Name,Budget,StartDate,RowVersion,InstructorID,SuperImportantString")] Department department)
+        public async Task<IActionResult> MakeAndDeleteOld([Bind("DepartmentID,Name,Budget,StartDate,RowVersion,InstructorID,SuperImportantString")] Department department)
         {
             if (ModelState.IsValid)
             {
+                var existingDepartment = await _context.Departments.FindAsync(department.DepartmentID);
+
+                if (existingDepartment == null)
+                {
+                    return NotFound();
+                }
                 var departmentClone = new Department
                 {
                     Name = department.Name,
                     Budget = department.Budget,
                     StartDate = department.StartDate,
                     SuperImportantString = department.SuperImportantString,
-                    InstructorID = department.InstructorID,
+                    InstructorID = department.InstructorID
                 };
+
+                _context.Remove(existingDepartment);
                 _context.Add(departmentClone);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(department);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MakeAndDeleteOld([Bind("Name,Budget,StartDate,RowVersion,InstructorID,SuperImportantString")] Department department)
-        {
-            if (ModelState.IsValid)
-            {
                 return RedirectToAction("Index");
             }
             return View(department);
