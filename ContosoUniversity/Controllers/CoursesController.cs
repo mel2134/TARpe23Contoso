@@ -18,7 +18,7 @@ namespace ContosoUniversity.Controllers
         }
 
         [HttpGet, ActionName("DetailsDelete")]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id,string name)
         {
             if (id == null)
             {
@@ -29,8 +29,30 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Title = "Details";
+
+            if (name != "Details" && name != "Delete")
+            {
+                return NotFound();
+            }
+            ViewBag.Title = name;
             return View(course);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteCourse(int? courseId)
+        {
+            if (courseId == null)
+            {
+                return NotFound();
+            }
+            var course = await _context.Courses.FindAsync(courseId);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            _context.Courses.Remove(course);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
     }
