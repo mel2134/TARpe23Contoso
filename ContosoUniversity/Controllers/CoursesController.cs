@@ -67,9 +67,10 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
+            var biggestCourseId = _context.Courses.OrderByDescending(m => m.CourseID).First();
             var clonedCourse = new Course
             {
-                CourseID = course.CourseID+1,
+                CourseID = biggestCourseId.CourseID + 1,
                 Title = course.Title,
                 Credits = course.Credits,
             };
@@ -77,6 +78,44 @@ namespace ContosoUniversity.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateEdit(int? id)
+        {
+            if (id == null)
+            {
+                ViewBag.Title = "Create";
+                ViewBag.Description = "Create a new course";
+                return View();
+            }
+            var course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseID == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Title = "Edit";
+            ViewBag.Description = "Edit a course";
+            return View(course);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateEdit(Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                if (course.CourseID == 0)
+                {
+                    var biggestCourseId = _context.Courses.OrderByDescending(m => m.CourseID).First();
+                    course.CourseID = biggestCourseId.CourseID + 1;
+                    _context.Add(course);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+
+
+            }
+            return View(course);
+        }
+
 
     }
 }
