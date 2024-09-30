@@ -110,7 +110,14 @@ namespace ContosoUniversity.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
-
+                var existingCourse = _context.Courses.AsNoTracking().FirstOrDefault(m => m.CourseID == course.CourseID);
+                if (existingCourse == null)
+                {
+                    return NotFound();
+                }
+                _context.Update(course);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
 
             }
             return View(course);
