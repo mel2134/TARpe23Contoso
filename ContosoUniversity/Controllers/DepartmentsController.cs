@@ -114,11 +114,12 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
+            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName");
             return View(department);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("DepartmentID,Name,Budget,StartDate,SuperImportantString")] Department department)
+        public async Task<IActionResult> Edit([Bind("DepartmentID,InstructorID,Name,Budget,StartDate,SuperImportantString")] Department department)
         {
             if (ModelState.IsValid)
             {
